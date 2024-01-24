@@ -1,0 +1,29 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: PolygonChild
+    network: matic
+    source:
+      address: "0x1f5C5fd6A66723fA22a778CC53263dd3FA6851E5"
+      abi: PolygonChild
+      startBlock: 50816123
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - MessageSent
+        - OwnershipTransferred
+      abis:
+        - name: PolygonChild
+          file: ./abis/PolygonChild.json
+      eventHandlers:
+        - event: MessageSent(bytes)
+          handler: handleMessageSent
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+      file: ./src/polygon-child.ts
