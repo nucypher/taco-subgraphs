@@ -4,3 +4,4 @@ generated/
 tests/.bin
 tests/.docker
 tests/.latest.json
+.env

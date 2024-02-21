@@ -4,6 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
+    "deploy": "eval $(grep '^DEPLOY_KEY' .env) && graph deploy PolygonChild --node https://subgraphs.alchemy.com/api/subgraphs/deploy --deploy-key ${DEPLOY_KEY} --ipfs https://ipfs.satsuma.xyz",
     "test": "graph test -d"
   },
   "dependencies": {
