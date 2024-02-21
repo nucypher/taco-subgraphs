@@ -13,4 +13,10 @@ https://polygonscan.com/address/0x1f5C5fd6A66723fA22a778CC53263dd3FA6851E5
 
 GraphQL API
 
-> https://api.studio.thegraph.com/query/24143/polygonchild/version/latest
+## Running tests
+
+Running the tests requires Docker.
+
+```bash
+npm run test
+```
