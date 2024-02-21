@@ -1,6 +1,6 @@
 {
-  "name": "subgraph-polygonChild",
-  "license": "UNLICENSED",
+  "name": "subgraph-polygonchild",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
