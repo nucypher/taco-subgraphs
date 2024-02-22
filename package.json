@@ -1,14 +1,11 @@
 {
-  "name": "subgraph-polygonChild",
-  "license": "UNLICENSED",
+  "name": "subgraph-polygonchild",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ subgraph-polygonChild",
-    "create-local": "graph create --node http://localhost:8020/ subgraph-polygonChild",
-    "remove-local": "graph remove --node http://localhost:8020/ subgraph-polygonChild",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 subgraph-polygonChild",
-    "test": "graph test"
+    "deploy": "eval $(grep '^DEPLOY_KEY' .env) && graph deploy PolygonChild --node https://subgraphs.alchemy.com/api/subgraphs/deploy --deploy-key ${DEPLOY_KEY} --ipfs https://ipfs.satsuma.xyz",
+    "test": "graph test -d"
   },
   "dependencies": {
     "@graphprotocol/graph-cli": "0.67.2",
