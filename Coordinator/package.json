@@ -1,0 +1,15 @@
+{
+    "name": "subgraph-coordinator",
+    "license": "GPL-3.0-or-later",
+    "scripts": {
+      "codegen": "graph codegen",
+      "build": "graph build",
+      "deploy": "eval $(grep '^DEPLOY_KEY' .env) && graph deploy Coordinator --node https://subgraphs.alchemy.com/api/subgraphs/deploy --deploy-key ${DEPLOY_KEY} --ipfs https://ipfs.satsuma.xyz",
+      "test": "graph test -d"
+    },
+    "dependencies": {
+      "@graphprotocol/graph-cli": "0.68.0",
+      "@graphprotocol/graph-ts": "0.32.0"
+    },
+    "devDependencies": { "matchstick-as": "0.5.0" }
+  }
