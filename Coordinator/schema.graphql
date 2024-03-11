@@ -1,0 +1,14 @@
+enum RitualStatus {
+  Started
+  SuccessfullyEnded
+  UnsuccessfullyEnded
+}
+
+type Ritual @entity {
+  id: ID!
+  authority: Bytes
+  participants: [Bytes!]
+  status: RitualStatus!
+  startTime: BigInt
+  endTime: BigInt
+}

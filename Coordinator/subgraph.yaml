@@ -1,0 +1,25 @@
+specVersion: 0.0.8
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Coordinator
+    network: matic
+    source:
+      address: "0xE74259e3dafe30bAA8700238e324b47aC98FE755"
+      abi: Coordinator
+      startBlock: 53247194
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+      abis:
+        - name: Coordinator
+          file: ./abis/Coordinator.json
+      eventHandlers:
+        - event: StartRitual(indexed uint32,indexed address,address[])
+          handler: handleStartRitual
+        - event: EndRitual(indexed uint32,bool)
+          handler: handleEndRitual
+      file: ./src/coordinator.ts
