@@ -1,0 +1,24 @@
+{
+  "name": "taco-subgraphs",
+  "license": "GPL-3.0-or-later",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.2.0",
+    "@typescript-eslint/parser": "^7.2.0",
+    "eslint": "^8.57.0",
+    "husky": "^9.0.11",
+    "prettier": "^3.2.5",
+    "typescript": "^5.4.2",
+    "lint-staged": "^15.2.2"
+  },
+  "scripts": {
+    "prepare": "husky",
+    "lint": "eslint --ignore-path .linterignore",
+    "format": "yarn prettier --check"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "yarn lint",
+      "yarn format"
+    ]
+  }
+}
