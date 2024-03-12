@@ -1,14 +1,23 @@
 enum RitualStatus {
-  Started
-  SuccessfullyEnded
-  UnsuccessfullyEnded
+  DKG_AWAITING_TRANSCRIPTS
+  DKG_AWAITING_AGGREGATIONS
+  DKG_TIMEOUT
+  DKG_INVALID
+  ACTIVE
+  EXPIRED
 }
 
 type Ritual @entity {
   id: ID!
-  authority: Bytes
-  participants: [Bytes!]
+  initiator: Bytes!
+  initTimestamp: BigInt!
+  endTimestamp: BigInt!
+  authority: Bytes!
+  dkgSize: Int!
+  threshold: Int!
+  accessController: Bytes!
+  participants: [Bytes!]!
   status: RitualStatus!
   startTime: BigInt
-  endTime: BigInt
+
 }
