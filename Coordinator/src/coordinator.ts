@@ -25,4 +25,5 @@ export function handleEndRitual(event: EndRitualEvent): void {
   entity.status = event.params.successful
     ? "SuccessfullyEnded"
     : "UnsuccessfullyEnded";
+  entity.save();
 }

@@ -8,12 +8,13 @@ dataSources:
     source:
       address: "0xE74259e3dafe30bAA8700238e324b47aC98FE755"
       abi: Coordinator
-      startBlock: 53247194
+      startBlock: 50224074
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
+        - Ritual
       abis:
         - name: Coordinator
           file: ./abis/Coordinator.json
