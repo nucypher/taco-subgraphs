@@ -18,6 +18,10 @@ type Ritual @entity {
   accessController: Bytes!
   participants: [Bytes!]!
   status: RitualStatus!
-  startTime: BigInt
+}
 
+type RitualCounter @entity {
+  id: ID!
+  total: Int!
+  active: Int!
 }

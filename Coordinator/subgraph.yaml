@@ -19,8 +19,22 @@ dataSources:
         - name: Coordinator
           file: ./abis/Coordinator.json
       eventHandlers:
+        # - event: AggregationPosted(indexed uint32,indexed address,bytes32)
+        #   handler: handleAggregationPosted
+        # - event: Initialized(uint64)
+        #   handler: handleInitialized
+        # - event: ParticipantPublicKeySet(indexed uint32,indexed address,(bytes32,bytes32,bytes32))
+        #   handler: handleParticipantPublicKeySet
+        # - event: ReimbursementPoolSet(indexed address)
+        #   handler: handleReimbursementPoolSet
+        # - event: RitualAuthorityTransferred(indexed uint32,indexed address,indexed address)
+        #   handler: handleRitualAuthorityTransferred
+        # - event: StartAggregationRound(indexed uint32)
+        #   handler: handleStartAggregationRound
         - event: StartRitual(indexed uint32,indexed address,address[])
           handler: handleStartRitual
         - event: EndRitual(indexed uint32,bool)
           handler: handleEndRitual
+        # - event: TranscriptPosted(indexed uint32,indexed address,bytes32)
+        #   handler: handleTranscriptPosted
       file: ./src/coordinator.ts
