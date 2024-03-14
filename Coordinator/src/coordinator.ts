@@ -34,10 +34,12 @@ export function handleStartRitual(event: StartRitualEvent): void {
   if (!ritualCounter) {
     ritualCounter = new RitualCounter("Counter");
     ritualCounter.total = 0;
-    ritualCounter.active = 0;
+    ritualCounter.ended = 0;
+    ritualCounter.notEnded = 0;
   }
 
   ritualCounter.total = ritualCounter.total + 1;
+  ritualCounter.notEnded = ritualCounter.notEnded + 1;
   ritualCounter.save();
 }
 
@@ -88,9 +90,21 @@ export function handleAggregationPosted(event: AggregationPostedEvent): void {
 export function handleEndRitual(event: EndRitualEvent): void {
   const ritual = Ritual.load(event.params.ritualId.toString());
   if (!ritual) {
-    log.error("Received EndRitual event for unknown ritual", []);
+    log.error("Received EndRitual event for unknown ritual {}", [
+      event.params.ritualId.toString(),
+    ]);
     return;
   }
   ritual.dkgStatus = "ENDED";
   ritual.save();
+
+  const ritualCounter = RitualCounter.load("Counter");
+  if (!ritualCounter) {
+    log.error("Received EndRitual event before StartRitual", []);
+    return;
+  }
+
+  ritualCounter.notEnded = ritualCounter.notEnded - 1;
+  ritualCounter.ended = ritualCounter.ended + 1;
+  ritualCounter.save();
 }

@@ -24,5 +24,6 @@ type Ritual @entity {
 type RitualCounter @entity {
   id: ID!
   total: Int!
-  active: Int!
+  ended: Int!
+  notEnded: Int!
 }
