@@ -1,8 +1,9 @@
-import { Bytes } from "@graphprotocol/graph-ts";
+import { Bytes, log } from "@graphprotocol/graph-ts";
 import {
   Coordinator,
   StartRitual as StartRitualEvent,
-  // EndRitual as EndRitualEvent,
+  TranscriptPosted as TranscriptPostedEvent,
+  StartAggregationRound as StartAggregationRoundEvent,
 } from "../generated/Coordinator/Coordinator";
 import { Ritual, RitualCounter } from "../generated/schema";
 
@@ -20,6 +21,8 @@ export function handleStartRitual(event: StartRitualEvent): void {
   ritual.threshold = ritualInst.getThreshold();
   ritual.accessController = ritualInst.getAccessController();
   ritual.participants = changetype<Bytes[]>(event.params.participants);
+  ritual.postedTranscriptsAmount = 0;
+  ritual.postedTranscripts = [];
   ritual.status = "DKG_AWAITING_TRANSCRIPTS";
   ritual.save();
 
@@ -34,16 +37,30 @@ export function handleStartRitual(event: StartRitualEvent): void {
   ritualCounter.save();
 }
 
-// export function handleEndRitual(event: EndRitualEvent): void {
-// const ritualId = event.params.ritualId.toString();
-// let entity = Ritual.load(ritualId);
-// if (!entity) {
-//   log.warning("Received EndRitual of unknown ritual ID: {}", [ritualId]);
-//   entity = new Ritual(ritualId);
-// }
-// entity.endTime = event.block.timestamp;
-// // entity.status = event.params.successful
-// //   ? "SuccessfullyEnded"
-// //   : "UnsuccessfullyEnded";
-// entity.save();
-// }
+export function handleTranscriptPosted(event: TranscriptPostedEvent): void {
+  const ritual = Ritual.load(event.params.ritualId.toString());
+  if (!ritual) {
+    log.error("Node {} posted a transcript for unknown ritual: {}", [
+      event.params.node.toHexString(),
+      event.params.ritualId.toString(),
+    ]);
+    return;
+  }
+  const postedTranscripts = ritual.postedTranscripts;
+  postedTranscripts.push(event.params.node);
+  ritual.postedTranscripts = postedTranscripts;
+  ritual.postedTranscriptsAmount = ritual.postedTranscriptsAmount + 1;
+  ritual.save();
+}
+
+export function handleStartAggregationRound(
+  event: StartAggregationRoundEvent,
+): void {
+  const ritual = Ritual.load(event.params.ritualId.toString());
+  if (!ritual) {
+    log.error("Received StartAggregationRound event for unknown ritual", []);
+    return;
+  }
+  ritual.status = "DKG_AWAITING_AGGREGATIONS";
+  ritual.save();
+}

@@ -29,12 +29,12 @@ dataSources:
         #   handler: handleReimbursementPoolSet
         # - event: RitualAuthorityTransferred(indexed uint32,indexed address,indexed address)
         #   handler: handleRitualAuthorityTransferred
-        # - event: StartAggregationRound(indexed uint32)
-        #   handler: handleStartAggregationRound
         - event: StartRitual(indexed uint32,indexed address,address[])
           handler: handleStartRitual
-        - event: EndRitual(indexed uint32,bool)
-          handler: handleEndRitual
-        # - event: TranscriptPosted(indexed uint32,indexed address,bytes32)
-        #   handler: handleTranscriptPosted
+        - event: TranscriptPosted(indexed uint32,indexed address,bytes32)
+          handler: handleTranscriptPosted
+        - event: StartAggregationRound(indexed uint32)
+          handler: handleStartAggregationRound
+        # - event: EndRitual(indexed uint32,bool)
+          # handler: handleEndRitual
       file: ./src/coordinator.ts

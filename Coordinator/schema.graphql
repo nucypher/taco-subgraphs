@@ -17,6 +17,8 @@ type Ritual @entity {
   threshold: Int!
   accessController: Bytes!
   participants: [Bytes!]!
+  postedTranscriptsAmount: Int!
+  postedTranscripts: [Bytes!]!
   status: RitualStatus!
 }
 
