@@ -4,6 +4,8 @@ import {
   StartRitual as StartRitualEvent,
   TranscriptPosted as TranscriptPostedEvent,
   StartAggregationRound as StartAggregationRoundEvent,
+  AggregationPosted as AggregationPostedEvent,
+  EndRitual as EndRitualEvent,
 } from "../generated/Coordinator/Coordinator";
 import { Ritual, RitualCounter } from "../generated/schema";
 
@@ -23,6 +25,8 @@ export function handleStartRitual(event: StartRitualEvent): void {
   ritual.participants = changetype<Bytes[]>(event.params.participants);
   ritual.postedTranscriptsAmount = 0;
   ritual.postedTranscripts = [];
+  ritual.postedAggregationsAmount = 0;
+  ritual.postedAggregations = [];
   ritual.status = "DKG_AWAITING_TRANSCRIPTS";
   ritual.save();
 
@@ -62,5 +66,31 @@ export function handleStartAggregationRound(
     return;
   }
   ritual.status = "DKG_AWAITING_AGGREGATIONS";
+  ritual.save();
+}
+
+export function handleAggregationPosted(event: AggregationPostedEvent): void {
+  const ritual = Ritual.load(event.params.ritualId.toString());
+  if (!ritual) {
+    log.error("Node {} posted an aggregation for unknown ritual: {}", [
+      event.params.node.toHexString(),
+      event.params.ritualId.toString(),
+    ]);
+    return;
+  }
+  const postedAggregations = ritual.postedAggregations;
+  postedAggregations.push(event.params.node);
+  ritual.postedAggregations = postedAggregations;
+  ritual.postedAggregationsAmount = ritual.postedAggregationsAmount + 1;
+  ritual.save();
+}
+
+export function handleEndRitual(event: EndRitualEvent): void {
+  const ritual = Ritual.load(event.params.ritualId.toString());
+  if (!ritual) {
+    log.error("Received EndRitual event for unknown ritual", []);
+    return;
+  }
+  ritual.status = "ENDED";
   ritual.save();
 }

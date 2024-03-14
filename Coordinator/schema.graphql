@@ -19,6 +19,8 @@ type Ritual @entity {
   participants: [Bytes!]!
   postedTranscriptsAmount: Int!
   postedTranscripts: [Bytes!]!
+  postedAggregationsAmount: Int!
+  postedAggregations: [Bytes!]!
   status: RitualStatus!
 }
 
