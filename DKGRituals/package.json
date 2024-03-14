@@ -1,10 +1,10 @@
 {
-  "name": "subgraph-coordinator",
+  "name": "subgraph-dkg-rituals",
   "license": "GPL-3.0-or-later",
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "eval $(grep '^DEPLOY_KEY' .env) && graph deploy Coordinator --node https://subgraphs.alchemy.com/api/subgraphs/deploy --deploy-key ${DEPLOY_KEY} --ipfs https://ipfs.satsuma.xyz",
+    "deploy": "eval $(grep '^DEPLOY_KEY' .env) && graph deploy DKGRituals --node https://subgraphs.alchemy.com/api/subgraphs/deploy --deploy-key ${DEPLOY_KEY} --ipfs https://ipfs.satsuma.xyz",
     "test": "graph test -d"
   },
   "dependencies": {
