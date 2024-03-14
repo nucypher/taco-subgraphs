@@ -6,6 +6,7 @@ import {
   StartAggregationRound as StartAggregationRoundEvent,
   AggregationPosted as AggregationPostedEvent,
   EndRitual as EndRitualEvent,
+  RitualAuthorityTransferred as RitualAuthorityTransferredEvent,
 } from "../generated/Coordinator/Coordinator";
 import { Ritual, RitualCounter } from "../generated/schema";
 
@@ -107,4 +108,19 @@ export function handleEndRitual(event: EndRitualEvent): void {
   ritualCounter.notEnded = ritualCounter.notEnded - 1;
   ritualCounter.ended = ritualCounter.ended + 1;
   ritualCounter.save();
+}
+
+export function handleRitualAuthorityTransferred(
+  event: RitualAuthorityTransferredEvent,
+): void {
+  const ritual = Ritual.load(event.params.ritualId.toString());
+  if (!ritual) {
+    log.error(
+      "Received RitualAuthorityTransferred event for unknown ritual {}",
+      [event.params.ritualId.toString()],
+    );
+    return;
+  }
+  ritual.authority = event.params.newAuthority;
+  ritual.save();
 }

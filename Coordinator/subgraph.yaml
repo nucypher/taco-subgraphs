@@ -19,12 +19,6 @@ dataSources:
         - name: Coordinator
           file: ./abis/Coordinator.json
       eventHandlers:
-        # - event: ParticipantPublicKeySet(indexed uint32,indexed address,(bytes32,bytes32,bytes32))
-        #   handler: handleParticipantPublicKeySet
-        # - event: ReimbursementPoolSet(indexed address)
-        #   handler: handleReimbursementPoolSet
-        # - event: RitualAuthorityTransferred(indexed uint32,indexed address,indexed address)
-        #   handler: handleRitualAuthorityTransferred
         - event: StartRitual(indexed uint32,indexed address,address[])
           handler: handleStartRitual
         - event: TranscriptPosted(indexed uint32,indexed address,bytes32)
@@ -35,4 +29,6 @@ dataSources:
           handler: handleAggregationPosted
         - event: EndRitual(indexed uint32,bool)
           handler: handleEndRitual
+        - event: RitualAuthorityTransferred(indexed uint32,indexed address,indexed address)
+          handler: handleRitualAuthorityTransferred
       file: ./src/coordinator.ts
