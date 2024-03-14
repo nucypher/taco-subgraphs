@@ -27,7 +27,7 @@ export function handleStartRitual(event: StartRitualEvent): void {
   ritual.postedTranscripts = [];
   ritual.postedAggregationsAmount = 0;
   ritual.postedAggregations = [];
-  ritual.status = "DKG_AWAITING_TRANSCRIPTS";
+  ritual.dkgStatus = "DKG_AWAITING_TRANSCRIPTS";
   ritual.save();
 
   let ritualCounter = RitualCounter.load("Counter");
@@ -65,7 +65,7 @@ export function handleStartAggregationRound(
     log.error("Received StartAggregationRound event for unknown ritual", []);
     return;
   }
-  ritual.status = "DKG_AWAITING_AGGREGATIONS";
+  ritual.dkgStatus = "DKG_AWAITING_AGGREGATIONS";
   ritual.save();
 }
 
@@ -91,6 +91,6 @@ export function handleEndRitual(event: EndRitualEvent): void {
     log.error("Received EndRitual event for unknown ritual", []);
     return;
   }
-  ritual.status = "ENDED";
+  ritual.dkgStatus = "ENDED";
   ritual.save();
 }

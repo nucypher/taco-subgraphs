@@ -1,10 +1,7 @@
-enum RitualStatus {
+enum DKGStatus {
   DKG_AWAITING_TRANSCRIPTS
   DKG_AWAITING_AGGREGATIONS
-  DKG_TIMEOUT
-  DKG_INVALID
-  ACTIVE
-  EXPIRED
+  ENDED
 }
 
 type Ritual @entity {
@@ -21,7 +18,7 @@ type Ritual @entity {
   postedTranscripts: [Bytes!]!
   postedAggregationsAmount: Int!
   postedAggregations: [Bytes!]!
-  status: RitualStatus!
+  dkgStatus: DKGStatus!
 }
 
 type RitualCounter @entity {
