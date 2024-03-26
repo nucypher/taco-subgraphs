@@ -1,0 +1,29 @@
+enum DKGStatus {
+  DKG_AWAITING_TRANSCRIPTS
+  DKG_AWAITING_AGGREGATIONS
+  ENDED
+}
+
+type Ritual @entity {
+  id: ID!
+  initiator: Bytes!
+  initTimestamp: BigInt!
+  endTimestamp: BigInt!
+  authority: Bytes!
+  dkgSize: Int!
+  threshold: Int!
+  accessController: Bytes!
+  participants: [Bytes!]!
+  postedTranscriptsAmount: Int!
+  postedTranscripts: [Bytes!]!
+  postedAggregationsAmount: Int!
+  postedAggregations: [Bytes!]!
+  dkgStatus: DKGStatus!
+}
+
+type RitualCounter @entity {
+  id: ID!
+  total: Int!
+  ended: Int!
+  notEnded: Int!
+}

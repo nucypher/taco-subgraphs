@@ -1,0 +1,34 @@
+specVersion: 0.0.8
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Coordinator
+    network: matic
+    source:
+      address: "0xE74259e3dafe30bAA8700238e324b47aC98FE755"
+      abi: Coordinator
+      startBlock: 50224074
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Ritual
+      abis:
+        - name: Coordinator
+          file: ./abis/Coordinator.json
+      eventHandlers:
+        - event: StartRitual(indexed uint32,indexed address,address[])
+          handler: handleStartRitual
+        - event: TranscriptPosted(indexed uint32,indexed address,bytes32)
+          handler: handleTranscriptPosted
+        - event: StartAggregationRound(indexed uint32)
+          handler: handleStartAggregationRound
+        - event: AggregationPosted(indexed uint32,indexed address,bytes32)
+          handler: handleAggregationPosted
+        - event: EndRitual(indexed uint32,bool)
+          handler: handleEndRitual
+        - event: RitualAuthorityTransferred(indexed uint32,indexed address,indexed address)
+          handler: handleRitualAuthorityTransferred
+      file: ./src/coordinator.ts
