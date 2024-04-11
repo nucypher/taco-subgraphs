@@ -96,7 +96,7 @@ export function handleEndRitual(event: EndRitualEvent): void {
     ]);
     return;
   }
-  ritual.dkgStatus = "ENDED";
+  ritual.dkgStatus = event.params.successful ? "SUCCESSFUL" : "UNSUCCESSFUL";
   ritual.save();
 
   const ritualCounter = RitualCounter.load("Counter");
