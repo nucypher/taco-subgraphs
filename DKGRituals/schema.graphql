@@ -1,7 +1,8 @@
 enum DKGStatus {
+  SUCCESSFUL
+  UNSUCCESSFUL
   DKG_AWAITING_TRANSCRIPTS
   DKG_AWAITING_AGGREGATIONS
-  ENDED
 }
 
 type Ritual @entity {
@@ -24,6 +25,7 @@ type Ritual @entity {
 type RitualCounter @entity {
   id: ID!
   total: Int!
-  ended: Int!
+  successful: Int!
+  unsuccessful: Int!
   notEnded: Int!
 }

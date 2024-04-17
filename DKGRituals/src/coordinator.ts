@@ -35,7 +35,8 @@ export function handleStartRitual(event: StartRitualEvent): void {
   if (!ritualCounter) {
     ritualCounter = new RitualCounter("Counter");
     ritualCounter.total = 0;
-    ritualCounter.ended = 0;
+    ritualCounter.successful = 0;
+    ritualCounter.unsuccessful = 0;
     ritualCounter.notEnded = 0;
   }
 
@@ -96,7 +97,7 @@ export function handleEndRitual(event: EndRitualEvent): void {
     ]);
     return;
   }
-  ritual.dkgStatus = "ENDED";
+  ritual.dkgStatus = event.params.successful ? "SUCCESSFUL" : "UNSUCCESSFUL";
   ritual.save();
 
   const ritualCounter = RitualCounter.load("Counter");
@@ -106,7 +107,11 @@ export function handleEndRitual(event: EndRitualEvent): void {
   }
 
   ritualCounter.notEnded = ritualCounter.notEnded - 1;
-  ritualCounter.ended = ritualCounter.ended + 1;
+  if (event.params.successful) {
+    ritualCounter.successful = ritualCounter.successful + 1;
+  } else {
+    ritualCounter.unsuccessful = ritualCounter.unsuccessful + 1;
+  }
   ritualCounter.save();
 }
 
