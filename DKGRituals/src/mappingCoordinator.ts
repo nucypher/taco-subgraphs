@@ -62,7 +62,7 @@ export function handleTranscriptPosted(event: TranscriptPostedEvent): void {
   const postedTranscripts = ritual.postedTranscripts;
   postedTranscripts.push(event.params.node);
   ritual.postedTranscripts = postedTranscripts;
-  ritual.postedTranscriptsAmount = ritual.postedTranscriptsAmount + 1;
+  ritual.totalPostedTranscripts = ritual.totalPostedTranscripts + 1;
   ritual.save();
 }
 
@@ -91,7 +91,7 @@ export function handleAggregationPosted(event: AggregationPostedEvent): void {
   const postedAggregations = ritual.postedAggregations;
   postedAggregations.push(event.params.node);
   ritual.postedAggregations = postedAggregations;
-  ritual.postedAggregationsAmount = ritual.postedAggregationsAmount + 1;
+  ritual.totalPostedAggregations = ritual.totalPostedAggregations + 1;
   ritual.save();
 }
 

@@ -37,9 +37,9 @@ export function getOrCreateRitual(id: string): Ritual {
     ritual.threshold = 0;
     ritual.accessController = constants.ADDRESS_ZERO;
     ritual.participants = [];
-    ritual.postedTranscriptsAmount = 0;
+    ritual.totalPostedTranscripts = 0;
     ritual.postedTranscripts = [];
-    ritual.postedAggregationsAmount = 0;
+    ritual.totalPostedAggregations = 0;
     ritual.postedAggregations = [];
     ritual.transactions = [];
     ritual.dkgStatus = "UNKNOWN";
