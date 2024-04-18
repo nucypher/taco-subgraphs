@@ -12,7 +12,7 @@ import {
   getOrCreateRitual,
   getOrCreateRitualCounter,
   getOrCreateTransaction,
-  getOrCreateUser,
+  getOrCreateInitiator,
 } from "./utils/helper";
 import { RITUAL_COUNTER_ID } from "./utils/constants";
 import { calculatePublicKey, getTransactionIDFromEvent } from "./utils/utils";
@@ -50,11 +50,11 @@ export function handleStartRitual(event: StartRitualEvent): void {
   ritualCounter.notEnded = ritualCounter.notEnded + 1;
   ritualCounter.save();
 
-  const user = getOrCreateUser(ritual.initiator);
-  const rituals = user.rituals;
+  const initiator = getOrCreateInitiator(ritual.initiator);
+  const rituals = initiator.rituals;
   rituals.push(ritual.id);
-  user.rituals = rituals;
-  user.save();
+  initiator.rituals = rituals;
+  initiator.save();
 }
 
 export function handleTranscriptPosted(event: TranscriptPostedEvent): void {

@@ -43,7 +43,7 @@ type Transaction @entity {
   rituals: [Ritual!] @derivedFrom(field: "transactions")
 }
 
-type User @entity {
+type Initiator @entity {
   id: Bytes!
   rituals: [Ritual!]!
 }

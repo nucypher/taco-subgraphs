@@ -3,7 +3,7 @@ import {
   Ritual,
   RitualCounter,
   Transaction,
-  User,
+  Initiator,
 } from "../../generated/schema";
 import * as constants from "./constants";
 
@@ -16,13 +16,13 @@ export function getOrCreateTransaction(id: string): Transaction {
   return transaction as Transaction;
 }
 
-export function getOrCreateUser(id: Bytes): User {
-  let user = User.load(id);
-  if (!user) {
-    user = new User(id);
-    user.rituals = [];
+export function getOrCreateInitiator(id: Bytes): Initiator {
+  let initiator = Initiator.load(id);
+  if (!initiator) {
+    initiator = new Initiator(id);
+    initiator.rituals = [];
   }
-  return user;
+  return initiator;
 }
 
 export function getOrCreateRitual(id: string): Ritual {
