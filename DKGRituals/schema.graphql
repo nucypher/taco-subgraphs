@@ -33,7 +33,7 @@ type RitualCounter @entity {
   notEnded: Int!
 }
 
-type Transaction @entity {
+type Transaction @entity(immutable: true) {
   id: ID!
   txHash: Bytes!
   timestamp: BigInt!
