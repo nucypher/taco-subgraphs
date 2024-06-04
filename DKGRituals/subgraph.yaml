@@ -31,4 +31,4 @@ dataSources:
           handler: handleEndRitual
         - event: RitualAuthorityTransferred(indexed uint32,indexed address,indexed address)
           handler: handleRitualAuthorityTransferred
-      file: ./src/mappingCoordinator.ts
+      file: ./src/coordinator.ts
