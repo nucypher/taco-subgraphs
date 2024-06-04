@@ -1,20 +1,5 @@
 import { Bytes } from "@graphprotocol/graph-ts";
-import {
-  Ritual,
-  RitualCounter,
-  Transaction,
-  Initiator,
-} from "../../generated/schema";
-import * as constants from "./constants";
-
-export function getOrCreateTransaction(id: string): Transaction {
-  let transaction = Transaction.load(id);
-  if (transaction == null) {
-    transaction = new Transaction(id);
-    transaction.id = id;
-  }
-  return transaction as Transaction;
-}
+import { RitualCounter, Initiator } from "../../generated/schema";
 
 export function getOrCreateInitiator(id: Bytes): Initiator {
   let initiator = Initiator.load(id);
@@ -23,28 +8,6 @@ export function getOrCreateInitiator(id: Bytes): Initiator {
     initiator.rituals = [];
   }
   return initiator;
-}
-
-export function getOrCreateRitual(id: string): Ritual {
-  let ritual = Ritual.load(id);
-  if (!ritual) {
-    ritual = new Ritual(id);
-    ritual.initiator = constants.ADDRESS_ZERO;
-    ritual.initTimestamp = constants.ZERO_BI;
-    ritual.endTimestamp = constants.ZERO_BI;
-    ritual.authority = constants.ADDRESS_ZERO;
-    ritual.dkgSize = 0;
-    ritual.threshold = 0;
-    ritual.accessController = constants.ADDRESS_ZERO;
-    ritual.participants = [];
-    ritual.totalPostedTranscripts = 0;
-    ritual.postedTranscripts = [];
-    ritual.totalPostedAggregations = 0;
-    ritual.postedAggregations = [];
-    ritual.transactions = [];
-    ritual.dkgStatus = "UNKNOWN";
-  }
-  return ritual;
 }
 
 export function getOrCreateRitualCounter(id: string): RitualCounter {
