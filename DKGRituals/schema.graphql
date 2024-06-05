@@ -1,4 +1,5 @@
 enum DKGStatus {
+  UNKNOWN
   SUCCESSFUL
   UNSUCCESSFUL
   DKG_AWAITING_TRANSCRIPTS
@@ -15,11 +16,13 @@ type Ritual @entity {
   threshold: Int!
   accessController: Bytes!
   participants: [Bytes!]!
-  postedTranscriptsAmount: Int!
+  totalPostedTranscripts: Int!
   postedTranscripts: [Bytes!]!
-  postedAggregationsAmount: Int!
+  totalPostedAggregations: Int!
   postedAggregations: [Bytes!]!
+  publicKey: String
   dkgStatus: DKGStatus!
+  transactions: [Transaction!]!
 }
 
 type RitualCounter @entity {
@@ -28,4 +31,19 @@ type RitualCounter @entity {
   successful: Int!
   unsuccessful: Int!
   notEnded: Int!
+}
+
+type Transaction @entity(immutable: true) {
+  id: ID!
+  txHash: Bytes!
+  timestamp: BigInt!
+  from: Bytes!
+  to: Bytes
+  description: String
+  rituals: [Ritual!] @derivedFrom(field: "transactions")
+}
+
+type Initiator @entity {
+  id: Bytes!
+  rituals: [Ritual!]!
 }
