@@ -1,6 +1,6 @@
 # TACo's PolygonChild application subgraph
 
-PolygonChild contract is part of [TACo application](https://docs.threshold.network/applications/threshold-access-control).
+PolygonChild contract is part of [TACo application](https://docs.taco.build/).
 
 This subgraph collects the two main events of this contract:
 
