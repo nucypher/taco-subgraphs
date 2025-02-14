@@ -1,28 +1,24 @@
-# TACo's PolygonChild application subgraph
+# TACo's DKG Rituals subgraph
 
-PolygonChild contract is part of [TACo application](https://docs.taco.build/).
+The status of DKG Rituals is managed by
+[Coordinator contract](https://polygonscan.com/address/0xe74259e3dafe30baa8700238e324b47ac98fe755).
 
-This subgraph collects the two main events of this contract:
+This subgraph collects the DKG Ritual-related events, keeping track of the status of each event.
 
-- MessageSent
-- OwnershipTransferred
-
-This contract lives in Polygon mainnet:
-
-https://polygonscan.com/address/0x1f5C5fd6A66723fA22a778CC53263dd3FA6851E5
+This subgraph is used by [tacoscan.com](https://tacoscan.com/)
 
 This subgraph has been deployed using [Alchemy subgraphs](https://subgraphs.alchemy.com/).
 
 GraphQL API
 
-> https://subgraph.satsuma-prod.com/735cd3ac7b23/nucypher-ops/PolygonChild/api
+> https://subgraph.satsuma-prod.com/735cd3ac7b23/nucypher-ops/DKGRituals/api
 
 ## Contributing
 ### Installation
 Install NPM packages from this folder:
 
 ```bash
-cd PolygonChild
+cd DKGRituals
 yarn install
 ```
 
@@ -31,13 +27,6 @@ This must be done everytime the subgraph code is modified:
 
 ```bash
 yarn codegen && yarn build
-```
-
-### Running tests
-Running the tests requires Docker.
-
-```bash
-yarn test
 ```
 
 ### Deploying a new version
