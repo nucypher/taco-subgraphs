@@ -23,6 +23,8 @@ Running the tests requires Docker.
 
 ```bash
 npm run test
+# or
+yarn test
 ```
 
 ## Deploying a new version
@@ -36,4 +38,6 @@ DEPLOY_KEY=xz.........49
 
 ```bash
 npm run deploy
+# or
+yarn deploy
 ```
