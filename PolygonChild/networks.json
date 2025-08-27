@@ -3,6 +3,10 @@
     "PolygonChild": {
       "address": "0x1f5C5fd6A66723fA22a778CC53263dd3FA6851E5",
       "startBlock": 50816123
+    },
+    "TACoChildApplication": {
+      "address": "0xFa07aaB78062Fac4C36995bF28F6D677667973F5",
+      "startBlock": 50223997
     }
   }
 }
