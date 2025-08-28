@@ -46,4 +46,6 @@ dataSources:
       eventHandlers:
         - event: Released(indexed address)
           handler: handleReleased
+        - event: ReleaseResent(indexed address)
+          handler: handleReleaseResent
       file: ./src/taco-child-application.ts

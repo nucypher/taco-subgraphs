@@ -122,6 +122,19 @@
   },
   {
     "type": "event",
+    "name": "ReleaseResent",
+    "inputs": [
+      {
+        "name": "stakingProvider",
+        "type": "address",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "event",
     "name": "Released",
     "inputs": [
       {
