@@ -24,4 +24,6 @@ type Released @entity(immutable: true) {
   releaseResentTimestamp: BigInt
   releaseTransactionHash: Bytes!
   releaseResentTransactionHash: Bytes
+  releaseTxSender: Bytes! #address
+  releaseResentTxSender: Bytes #address
 }

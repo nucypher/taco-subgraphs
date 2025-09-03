@@ -7,6 +7,7 @@ import { Released } from "../generated/schema";
 
 export function handleReleased(event: ReleasedEvent): void {
   const stakingProvider = event.params.stakingProvider;
+  const txSender = event.transaction.from;
 
   const entity = new Released(stakingProvider.toHexString());
 
@@ -14,12 +15,13 @@ export function handleReleased(event: ReleasedEvent): void {
   entity.releaseBlockNumber = event.block.number;
   entity.releaseBlockTimestamp = event.block.timestamp;
   entity.releaseTransactionHash = event.transaction.hash;
-
+  entity.releaseTxSender = txSender;
   entity.save();
 }
 
 export function handleReleaseResent(event: ReleaseResentEvent): void {
   const stakingProvider = event.params.stakingProvider;
+  const txSender = event.transaction.from;
 
   const entity = Released.load(stakingProvider.toHexString());
   if (!entity) {
@@ -33,6 +35,6 @@ export function handleReleaseResent(event: ReleaseResentEvent): void {
   entity.releaseResentBlockNumber = event.block.number;
   entity.releaseResentTimestamp = event.block.timestamp;
   entity.releaseResentTransactionHash = event.transaction.hash;
-
+  entity.releaseResentTxSender = txSender;
   entity.save();
 }
