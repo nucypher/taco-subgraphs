@@ -5,3 +5,6 @@ tests/.bin
 tests/.docker
 tests/.latest.json
 .env
+.docker
+.latest.json
+.bin
