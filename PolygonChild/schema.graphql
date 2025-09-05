@@ -15,7 +15,7 @@ type OwnershipTransferred @entity(immutable: true) {
   transactionHash: Bytes!
 }
 
-type Released @entity(immutable: true) {
+type Released @entity {
   id: ID! # address
   releaseResent: Boolean!
   releaseBlockNumber: BigInt!
