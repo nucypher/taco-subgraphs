@@ -14,3 +14,16 @@ type OwnershipTransferred @entity(immutable: true) {
   blockTimestamp: BigInt!
   transactionHash: Bytes!
 }
+
+type Released @entity {
+  id: ID! # address
+  releaseResent: Boolean!
+  releaseBlockNumber: BigInt!
+  releaseResentBlockNumber: BigInt
+  releaseBlockTimestamp: BigInt!
+  releaseResentTimestamp: BigInt
+  releaseTransactionHash: Bytes!
+  releaseResentTransactionHash: Bytes
+  releaseTxSender: Bytes! #address
+  releaseResentTxSender: Bytes #address
+}
