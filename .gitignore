@@ -1,10 +1,7 @@
 node_modules
 build/
 generated/
-tests/.bin
-tests/.docker
-tests/.latest.json
-.env
+.bin
 .docker
 .latest.json
-.bin
+.env
